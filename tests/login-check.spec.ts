@@ -1,3 +1,4 @@
+// Fresh context, not the saved session, so this still signs in if setup fails.
 import { expect, test } from '@playwright/test';
 import { ensureAccount } from '../src/api/conduit';
 import { accounts } from '../src/data/accounts';

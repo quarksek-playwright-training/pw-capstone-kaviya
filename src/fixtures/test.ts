@@ -7,12 +7,15 @@ type AuthenticatedFixtures = {
 };
 
 export const test = base.extend<AuthenticatedFixtures>({
+  // The built-in context reads this file, so authedContext is already signed in.
   storageState: async ({}, use) => {
     await use(accounts.primary.storageState);
   },
   authedContext: async ({ context }, use) => {
     await use(context);
   },
+  // A second context for the other persistent account. newContext does not
+  // inherit project options, so the device settings are copied explicitly.
   secondaryContext: async ({ browser }, use, testInfo) => {
     const projectUse = testInfo.project.use;
     const context = await browser.newContext({

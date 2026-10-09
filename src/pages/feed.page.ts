@@ -1,6 +1,7 @@
 import { Locator } from '@playwright/test';
 import { BasePage } from './base.page';
 
+// Titles can contain apostrophes, which would break a single-quoted XPath string.
 function xpathLiteral(value: string): string {
   if (!value.includes("'")) {
     return `'${value}'`;

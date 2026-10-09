@@ -7,6 +7,8 @@ type StorageState = {
   origins: { localStorage: { name: string; value: string }[] }[];
 };
 
+// Creates the persistent account when it is missing. A failed register means
+// the email is already taken, so login confirms the saved password still works.
 export async function ensureAccount(request: APIRequestContext, account: Account): Promise<void> {
   const created = await request.post(`${API_URL}/users`, {
     data: {
@@ -36,7 +38,7 @@ export async function ensureAccount(request: APIRequestContext, account: Account
   }
 }
 
-export function tokenFromStorage(storageStatePath: string): string {
+function tokenFromStorage(storageStatePath: string): string {
   const state = JSON.parse(fs.readFileSync(storageStatePath, 'utf8')) as StorageState;
   for (const origin of state.origins) {
     const token = origin.localStorage.find((item) => item.name === 'jwtToken');
@@ -47,6 +49,8 @@ export function tokenFromStorage(storageStatePath: string): string {
   throw new Error(`jwtToken missing from ${storageStatePath}`);
 }
 
+// Deletes articles created by a test through the API, not the UI.
+// 404 is acceptable when the test failed before the article existed.
 export async function deleteTrackedArticles(request: APIRequestContext, slugs: string[]): Promise<void> {
   if (slugs.length === 0) {
     return;

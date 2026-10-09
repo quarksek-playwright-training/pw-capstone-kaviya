@@ -10,6 +10,7 @@
     "test:negative": "playwright test --grep @negative"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.0"
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^26.6.4"
   }
 }

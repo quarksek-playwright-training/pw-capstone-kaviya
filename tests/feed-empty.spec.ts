@@ -15,6 +15,8 @@ test(
       });
     };
 
+    // Home loads the global list at /api/articles. The followed-user feed is a
+    // separate URL, so both are answered with an empty article list.
     await page.route(/\/api\/articles(\?.*)?$/, async (route) => {
       const url = new URL(route.request().url());
       if (url.searchParams.has('tag') || url.searchParams.has('author') || url.searchParams.has('favorited')) {

@@ -30,6 +30,7 @@ test(
 
     const page = await authedContext.newPage();
     const editor = new EditorPage(page);
+    // The API rejects a title that already exists, so each run gets its own suffix.
     const runId = Date.now().toString(36);
     const published: ArticleSeed[] = [];
 

@@ -11,10 +11,11 @@ setup('create persistent accounts and save their sessions', async ({ page, reque
 
   for (const account of [accounts.primary, accounts.secondary]) {
     await ensureAccount(request, account);
+    // Drop the previous account's token before signing in as the next one.
     await page.goto('/');
     await page.evaluate(() => localStorage.clear());
     await auth.login(account.email, account.password);
-    await expect(page.getByRole('link', { name: 'New Article' })).toBeVisible();
+    await expect(auth.newArticleLink()).toBeVisible();
     await page.context().storageState({ path: account.storageState });
   }
 });

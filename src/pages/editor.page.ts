@@ -14,6 +14,7 @@ export class EditorPage extends BasePage {
     await this.page.getByRole('textbox', { name: "What's this article about?", exact: true }).fill(draft.description);
     await this.page.getByRole('textbox', { name: 'Write your article (in markdown)' }).fill(draft.body);
 
+    // A tag is stored only after Enter. Typing it and publishing leaves the field empty.
     const tagInput = this.page.getByRole('textbox', { name: 'Enter tags' });
     for (const tag of draft.tags) {
       await tagInput.fill(tag);

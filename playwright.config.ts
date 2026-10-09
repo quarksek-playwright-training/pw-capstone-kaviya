@@ -36,7 +36,7 @@ export default defineConfig({
       name: 'setup',
       testMatch: /auth\.setup\.ts/,
     },
-    // Signs in through the form, so it does not depend on the saved session.
+    // Login check signs in through the form and does not depend on the saved session.
     ...browsers.map((browser) => ({
       name: `${browser.name}-login`,
       testMatch: /login-check\.spec\.ts/,

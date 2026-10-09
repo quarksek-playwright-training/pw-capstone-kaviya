@@ -9,6 +9,7 @@ test(
   { tag: ['@regression', '@auth', '@negative'] },
   async ({ page, request }) => {
     await ensureAccount(request, accounts.primary);
+    // Usernames are limited to 20 characters. This stays under that and is unique.
     const username = `no${Date.now().toString(36)}`;
 
     const auth = new AuthPage(page);
