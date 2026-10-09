@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Tag filter Test",
+    "description": "Article filed under the Test tag",
+    "body": "Confirms the Test filter lists this article.",
+    "tag": "Test"
+  },
+  {
+    "title": "Tag filter Blog",
+    "description": "Article filed under the Blog tag",
+    "body": "Confirms the Blog filter lists this article.",
+    "tag": "Blog"
+  },
+  {
+    "title": "Tag filter Git",
+    "description": "Article filed under the Git tag",
+    "body": "Confirms the Git filter lists this article.",
+    "tag": "Git"
+  }
+]
