@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { APIRequestContext } from '@playwright/test';
-import { API_URL } from '../config';
+import { apiURL } from '../../playwright.config';
 import { Account, accounts } from '../data/accounts';
 
 type StorageState = {
@@ -10,7 +10,7 @@ type StorageState = {
 // Creates the persistent account when it is missing. A failed register means
 // the email is already taken, so login confirms the saved password still works.
 export async function ensureAccount(request: APIRequestContext, account: Account): Promise<void> {
-  const created = await request.post(`${API_URL}/users`, {
+  const created = await request.post(`${apiURL}/users`, {
     data: {
       user: {
         username: account.username,
@@ -23,7 +23,7 @@ export async function ensureAccount(request: APIRequestContext, account: Account
     return;
   }
 
-  const login = await request.post(`${API_URL}/users/login`, {
+  const login = await request.post(`${apiURL}/users/login`, {
     data: {
       user: {
         email: account.email,
@@ -57,7 +57,7 @@ export async function deleteTrackedArticles(request: APIRequestContext, slugs: s
   }
   const token = tokenFromStorage(accounts.primary.storageState);
   for (const slug of slugs) {
-    const response = await request.delete(`${API_URL}/articles/${encodeURIComponent(slug)}`, {
+    const response = await request.delete(`${apiURL}/articles/${encodeURIComponent(slug)}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (response.status() !== 204 && response.status() !== 404) {

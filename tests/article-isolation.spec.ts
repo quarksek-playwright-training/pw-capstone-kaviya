@@ -11,10 +11,7 @@ test.afterEach(async ({ request }) => {
   slugs.length = 0;
 });
 
-test(
-  'an article from one account is absent from the other account profile',
-  { tag: ['@regression', '@articles'] },
-  async ({ authedContext, secondaryContext }) => {
+test('an article from one account is absent from the other account profile @regression @articles', async ({ authedContext, secondaryContext }) => {
     const authorPage = await authedContext.newPage();
     const title = `Isolation article ${Date.now().toString(36)}`;
     const editor = new EditorPage(authorPage);
@@ -35,5 +32,4 @@ test(
     await otherFeed.openProfile(accounts.secondary.username);
     await expect(otherFeed.profileHeading(accounts.secondary.username)).toBeVisible();
     await expect(otherFeed.articleTitle(title)).toHaveCount(0);
-  },
-);
+});

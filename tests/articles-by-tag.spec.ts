@@ -19,10 +19,7 @@ test.afterEach(async ({ request }) => {
   slugs.length = 0;
 });
 
-test(
-  'articles from one data file each appear under their own tag filter',
-  { tag: ['@regression', '@articles'] },
-  async ({ authedContext }) => {
+test('articles from one data file each appear under their own tag filter @regression @articles', async ({ authedContext }) => {
     const seeds = JSON.parse(
       fs.readFileSync(path.join(process.cwd(), 'test-data', 'articles.json'), 'utf8'),
     ) as ArticleSeed[];
@@ -57,5 +54,4 @@ test(
         }
       }
     }
-  },
-);
+});

@@ -4,10 +4,7 @@ import { ensureAccount } from '../src/api/conduit';
 import { accounts } from '../src/data/accounts';
 import { AuthPage } from '../src/pages/auth.page';
 
-test(
-  'persistent account reaches the authenticated area after signing in',
-  { tag: ['@smoke', '@auth'] },
-  async ({ page, request }) => {
+test('persistent account reaches the authenticated area after signing in @smoke @auth', async ({ page, request }) => {
     const account = accounts.primary;
     await ensureAccount(request, account);
 
@@ -18,5 +15,4 @@ test(
     await expect(auth.newArticleLink()).toBeVisible();
     await expect(auth.usernameLink(account.username)).toBeVisible();
     await expect(auth.signInHeading()).toHaveCount(0);
-  },
-);
+});

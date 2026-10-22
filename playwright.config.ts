@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
-import { APP_URL } from './src/config';
+
+// The app and the API are different hosts. baseURL is the site the browser opens.
+export const appURL = 'https://conduit.bondaracademy.com';
+export const apiURL = 'https://conduit-api.bondaracademy.com/api';
 
 const browsers = [
   { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
@@ -10,6 +13,7 @@ const browsers = [
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  // process.env.CI is a string or undefined. !! makes it a boolean: true on CI, false locally.
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   timeout: 120_000,
@@ -25,7 +29,7 @@ export default defineConfig({
         ['list'],
       ],
   use: {
-    baseURL: APP_URL,
+    baseURL: appURL,
     locale: 'en-US',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',

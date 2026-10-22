@@ -2,10 +2,7 @@ import { Route } from '@playwright/test';
 import { expect, test } from '../src/fixtures/test';
 import { FeedPage } from '../src/pages/feed.page';
 
-test(
-  'the feed shows an empty state when the article request returns nothing',
-  { tag: ['@regression', '@articles', '@negative'] },
-  async ({ authedContext }) => {
+test('the feed shows an empty state when the article request returns nothing @regression @articles @negative', async ({ authedContext }) => {
     const page = await authedContext.newPage();
     const fulfillEmpty = async (route: Route) => {
       await route.fulfill({
@@ -37,5 +34,4 @@ test(
         name: 'Discover Bondar Academy: Your Gateway to Efficient Learning',
       }),
     ).toHaveCount(0);
-  },
-);
+});
