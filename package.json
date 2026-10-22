@@ -1,0 +1,16 @@
+{
+  "name": "final-pw-project",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:auth": "playwright test --grep @auth",
+    "test:articles": "playwright test --grep @articles",
+    "test:negative": "playwright test --grep @negative"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^26.6.4"
+  }
+}
